@@ -14,7 +14,7 @@ Bienvenido a la API de Canciones. Esta API te permite realizar operaciones CRUD 
 1. Clona este repositorio:
 
    ```bash
-   git clone https://github.com/tuusuario/api-canciones.git
+   git clone https://github.com/Jaycom17/node-express-songs-api.git
    cd api-canciones
 
 2. Instala las dependencias
