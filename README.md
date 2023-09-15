@@ -8,6 +8,7 @@ Bienvenido a la API de Canciones. Esta API te permite realizar operaciones CRUD 
 - mysql2: Conexión a la base de datos MySQL.
 - Zod: Validación de esquemas para asegurar la integridad de los datos.
 - Puppeteer: Realiza web scraping para obtener enlaces de YouTube e imágenes.
+- Cors: Manejo de peticiones desde distintas direcciones
 
 ## Instalación
 
