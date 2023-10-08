@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getSongs, getsong, postSong, putSong, deleteSong } from "../controllers/songs.controller.js";
+import { getSongs, getsong, postSong, putSong, deleteSong, getSongsByName } from "../controllers/songs.controller.js";
 import { validateSong } from "../middlewares/songs.middleware.js";
 import { songSchema } from "../schemas/song.schema.js";
 
@@ -77,6 +77,48 @@ router.get("/songs", getSongs);
  *         description: Internal server error.
  */
 router.get("/songs/:id", getsong);
+
+/**
+ * @swagger
+ * /api/songs/name/{songName}:
+ *   get:
+ *     summary: Retrieve a list of songs by name.
+ *     description: Retrieve a list of songs whose names include the specified parameter.
+ *     parameters:
+ *       - in: path
+ *         name: songName
+ *         required: true
+ *         description: The name or part of the name of the song to search for, if the name has spaces " ", you have to change it to "&".
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: List of songs retrieved successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   songId:
+ *                     type: integer
+ *                   songName:
+ *                     type: string
+ *                   artistName:
+ *                     type: string
+ *                   songGenre:
+ *                     type: string
+ *                   songImage:
+ *                     type: string
+ *                   songLink:
+ *                     type: string
+ *       404:
+ *         description: No songs found matching the specified name.
+ *       500:
+ *         description: Internal server error.
+ */
+router.get("/songs/name/:name", getSongsByName);
 
 /**
  * @swagger

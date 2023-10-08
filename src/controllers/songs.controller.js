@@ -1,5 +1,6 @@
 import { pool } from "../db.js";
 import { getLink } from "../webscrapping/getLink.js";
+import { validateSongName } from "../util/util.js";
 
 export const getSongs = async (req, res) => {
   try {
@@ -49,3 +50,14 @@ export const deleteSong = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
+
+export const getSongsByName = async (req, res) => {
+  try {
+    if(!validateSongName(req.params.name)){return res.status(500).json({ message: "Please check the string" });}
+    const name = `%${req.params.name.replace(/&/g, '%')}%`;
+    const [rows] = await pool.query("SELECT * FROM songs WHERE songName LIKE ? or artistName LIKE ? or songGenre LIKE ?", [name, name, name]);
+    return res.json(rows);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+}
